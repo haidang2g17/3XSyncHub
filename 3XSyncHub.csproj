@@ -1,0 +1,113 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<UseWPF>true</UseWPF>
+		<RootNamespace>_3XSyncHub</RootNamespace>
+		<StartupObject>_3XSyncHub.Program</StartupObject>
+		<AssemblyName>3X SyncHub</AssemblyName>
+		<ApplicationIcon>Resources\Icon\app.ico</ApplicationIcon>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<SatelliteResourceLanguages>en;vi</SatelliteResourceLanguages>
+		<Product>3X SyncHub</Product>
+		<Description>3X SyncHub - 3XVN product</Description>
+	</PropertyGroup>
+
+	<!-- Khi build -->
+	<Target Name="MoveDllsToLibrary" AfterTargets="Build">
+		<MakeDir Directories="$(TargetDir)Library" />
+		<MakeDir Directories="$(TargetDir)Logs" />
+		<MakeDir Directories="$(TargetDir)Config" />
+		<MakeDir Directories="$(TargetDir)Sql" />
+
+		<ItemGroup>
+			<DllFiles Include="$(TargetDir)*.dll" Exclude="$(TargetDir)$(AssemblyName).dll" />
+		</ItemGroup>
+		<Copy SourceFiles="@(DllFiles)" DestinationFolder="$(TargetDir)Library" SkipUnchangedFiles="true" />
+		<Delete Files="@(DllFiles)" Condition="Exists('%(FullPath)')" />
+	</Target>
+
+	<!-- Khi publish -->
+	<Target Name="MoveDllsToLibraryAfterPublish" AfterTargets="Publish">
+		<MakeDir Directories="$(PublishDir)Library" />
+		<MakeDir Directories="$(PublishDir)Logs" />
+		<MakeDir Directories="$(PublishDir)Config" />
+		<MakeDir Directories="$(PublishDir)Sql" />
+	</Target>
+	<ItemGroup>
+		<None Remove="Config\Config.json" />
+		<None Remove="Resources\Icon\app.ico" />
+		<None Remove="Sql\AutoUpdate\UpdateEmrDocumentError.sql" />
+		<None Remove="Sql\AutoUpdate\UpdateMedicineStoreSoluongKhadung.sql" />
+		<None Remove="Sql\SYTPTO\benh_truyennhiem_nguyhiem.sql" />
+		<None Remove="Sql\SYTPTO\capcuu.sql" />
+		<None Remove="Sql\SYTPTO\chuyenvien.sql" />
+		<None Remove="Sql\SYTPTO\phauthuat.sql" />
+		<None Remove="Sql\SYTPTO\thongtinhoatdong.sql" />
+	</ItemGroup>
+	<ItemGroup>
+		<Page Remove="Resources\Styles\Buttons.xaml" />
+		<Page Remove="Resources\Styles\Dialogs.xaml" />
+		<Page Remove="Resources\Styles\Inputs.xaml" />
+		<Page Remove="Resources\Styles\Typography.xaml" />
+	</ItemGroup>
+	<ItemGroup>
+		<Content Include="Sql\AutoUpdate\UpdateEmrDocumentError.sql">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Sql\AutoUpdate\UpdateMedicineStoreSoluongKhadung.sql">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+	<ItemGroup>
+		<Content Include="Config\Config.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Resource Include="Resources\Icon\app.ico">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resources\Styles\Buttons.xaml" />
+		<Resource Include="Resources\Styles\Dialogs.xaml" />
+		<Resource Include="Resources\Styles\Inputs.xaml" />
+		<Resource Include="Resources\Styles\Typography.xaml" />
+		<Content Include="Sql\SYTPTO\benh_truyennhiem_nguyhiem.sql">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Sql\SYTPTO\capcuu.sql">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Sql\SYTPTO\chuyenvien.sql">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Sql\SYTPTO\phauthuat.sql">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Sql\SYTPTO\thongtinhoatdong.sql">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="ModernWpfUI" Version="0.9.6" />
+		<PackageReference Include="ModernWpfUI.MahApps" Version="0.9.5" />
+		<PackageReference Include="Npgsql" Version="10.0.0-rc.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Properties\Settings.Designer.cs">
+	    <DesignTimeSharedInput>True</DesignTimeSharedInput>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Settings.settings</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Properties\Settings.settings">
+	    <Generator>SettingsSingleFileGenerator</Generator>
+	    <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+	  </None>
+	</ItemGroup>
+
+</Project>

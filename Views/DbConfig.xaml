@@ -1,0 +1,149 @@
+﻿<!-- ============================================================================
+ 🗂️ Module: 3XSyncHub.UI.DbConfig.xaml
+ 🔖 Version: 20251119_1144
+ 📌 Mục đích:
+   - Cấu hình Database MASTER & SLAVE theo chuẩn 3XVN.UI
+   - Style input chuẩn; layout 2 cột (Config + Log)
+   - Bộ nút chuẩn hệ thống: Lưu – Kiểm tra kết nối
+   - Khu vực log Height=800 theo chuẩn form hệ thống
+ ============================================================================ -->
+
+<Page x:Class="_3XSyncHub.Views.DbConfig"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Cấu hình Database"
+      Background="White"
+      FontFamily="Segoe UI"
+      FontSize="14"
+      Loaded="Page_Loaded">
+
+    <Grid Margin="30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- TIÊU ĐỀ -->
+        <TextBlock Grid.Row="0" Grid.Column="0"
+                   Text="⚙️ Cấu hình Database PostgreSQL"
+                   FontSize="18" FontWeight="Bold" Foreground="#333"
+                   HorizontalAlignment="Center" Margin="0,0,0,15"/>
+
+        <TextBlock Grid.Row="0" Grid.Column="1"
+                   Text="📝 Nhật ký hoạt động"
+                   FontSize="18" FontWeight="Bold" Foreground="#333"
+                   HorizontalAlignment="Center" Margin="0,0,0,15"/>
+
+        <!-- CỘT TRÁI -->
+        <Grid Grid.Row="1" Grid.Column="0" VerticalAlignment="Top">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <!-- MASTER -->
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+
+                <!-- SLAVE -->
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+
+                <!-- BUTTON -->
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- MASTER -->
+            <TextBlock Grid.Row="0" Text="Database Master" FontSize="16" FontWeight="Bold" Margin="0,10,0,10" Grid.ColumnSpan="2"/>
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Host:" Margin="0,4,0,10"/>
+            <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtMasterHost" Style="{StaticResource ConfigInputStyle}"/>
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Port:" Margin="0,4,0,10"/>
+            <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtMasterPort" Style="{StaticResource ConfigInputStyle}"/>
+
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="User:" Margin="0,4,0,10"/>
+            <TextBox Grid.Row="3" Grid.Column="1" x:Name="txtMasterUser" Style="{StaticResource ConfigInputStyle}"/>
+
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="Password:" Margin="0,4,0,10"/>
+            <PasswordBox Grid.Row="4" Grid.Column="1" x:Name="txtMasterPassword" Style="{StaticResource ConfigPasswordStyle}"/>
+
+            <TextBlock Grid.Row="5" Grid.Column="0" Text="Database:" Margin="0,4,0,10"/>
+            <TextBox Grid.Row="5" Grid.Column="1" x:Name="txtMasterDatabase" Style="{StaticResource ConfigInputStyle}"/>
+
+            <!-- SLAVE -->
+            <TextBlock Grid.Row="6" Text="Database Slave" FontSize="16" FontWeight="Bold" Margin="0,20,0,10" Grid.ColumnSpan="2"/>
+
+            <TextBlock Grid.Row="7" Grid.Column="0" Text="Host:" Margin="0,4,0,10"/>
+            <TextBox Grid.Row="7" Grid.Column="1" x:Name="txtSlaveHost" Style="{StaticResource ConfigInputStyle}"/>
+
+            <TextBlock Grid.Row="8" Grid.Column="0" Text="Port:" Margin="0,4,0,10"/>
+            <TextBox Grid.Row="8" Grid.Column="1" x:Name="txtSlavePort" Style="{StaticResource ConfigInputStyle}"/>
+
+            <TextBlock Grid.Row="9" Grid.Column="0" Text="User:" Margin="0,4,0,10"/>
+            <TextBox Grid.Row="9" Grid.Column="1" x:Name="txtSlaveUser" Style="{StaticResource ConfigInputStyle}"/>
+
+            <TextBlock Grid.Row="10" Grid.Column="0" Text="Password:" Margin="0,4,0,10"/>
+            <PasswordBox Grid.Row="10" Grid.Column="1" x:Name="txtSlavePassword" Style="{StaticResource ConfigPasswordStyle}"/>
+
+            <TextBlock Grid.Row="11" Grid.Column="0" Text="Database:" Margin="0,4,0,10"/>
+            <TextBox Grid.Row="11" Grid.Column="1" x:Name="txtSlaveDatabase" Style="{StaticResource ConfigInputStyle}"/>
+
+            <!-- BUTTONS -->
+            <StackPanel Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="2"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Margin="0,20,0,0">
+
+                <Button x:Name="btnSave"
+                        Content="💾 Lưu"
+                        Width="100"
+                        Margin="0,0,10,0"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Click="BtnSave_Click"/>
+
+                <Button x:Name="btnCheckConnection"
+                        Content="▶ Kiểm tra kết nối"
+                        Width="150"
+                        Margin="0,0,10,0"
+                        Style="{StaticResource SecondaryButtonStyle}"
+                        Click="BtnCheckConnection_Click"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- LOG -->
+        <StackPanel Grid.Row="1" Grid.Column="1" Margin="40,0,0,0">
+            <Border BorderThickness="1" BorderBrush="#DDD" CornerRadius="8">
+                <ScrollViewer Height="800" VerticalScrollBarVisibility="Auto">
+                    <ListBox ItemsSource="{Binding Logs}" Background="#FAFAFA" BorderThickness="0" Padding="5">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Message}"
+                                           Foreground="{Binding Color}"
+                                           FontSize="13"
+                                           Margin="0,2,0,2"
+                                           TextWrapping="Wrap"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </ScrollViewer>
+            </Border>
+        </StackPanel>
+
+    </Grid>
+</Page>

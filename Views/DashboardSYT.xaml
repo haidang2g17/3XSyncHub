@@ -1,0 +1,174 @@
+﻿<!-- ============================================================================
+ 🗂️ Module: 3XSyncHub.UI.DashboardSYT.xaml
+ 🔖 Version: 20251119_1222
+ 📌 Nội dung đã xử lý:
+   - Form cấu hình Dashboard SYT theo chuẩn 3XVN.UI (2 cột: Config 400px + Log)
+   - Các trường URL / Username / Password / DatabaseSource / Interval / DailyTime
+   - Sử dụng style chuẩn (ConfigInputStyle, ConfigPasswordStyle, ShortInputStyle)
+   - Bộ nút Lưu – Bắt đầu – Dừng theo quy tắc Button hệ thống
+   - Khu vực log chiều cao 800px, border + ScrollViewer đúng chuẩn form hệ thống
+ ============================================================================ -->
+
+
+<Page x:Class="_3XSyncHub.Views.DashboardSYT"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      xmlns:models="clr-namespace:_3XSyncHub.Models.Enums"
+      Title="Đồng bộ Dashboard SYT"
+      Loaded="Page_Loaded">
+
+    <Page.Resources>
+        <!-- Load enum DatabaseSource cho ComboBox -->
+        <ObjectDataProvider x:Key="DatabaseSourceEnum"
+                            MethodName="GetValues"
+                            ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="models:DatabaseSource"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Page.Resources>
+
+    <Grid Margin="30">
+        <!-- Layout tổng -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400" MinWidth="400" MaxWidth="400"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Tiêu đề -->
+        <TextBlock Text="⚙️ Cấu hình kết nối Dashboard SYT"
+                   FontSize="18"
+                   FontWeight="Bold"
+                   Foreground="#333"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,15"
+                   Grid.Row="0" Grid.Column="0"/>
+
+        <TextBlock Text="📝 Nhật ký hoạt động"
+                   FontSize="18"
+                   FontWeight="Bold"
+                   Foreground="#333"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,15"
+                   Grid.Row="0" Grid.Column="1"/>
+
+        <!-- ====== Khu cấu hình bên trái ====== -->
+        <Grid Grid.Row="1" Grid.Column="0" VerticalAlignment="Top">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <!-- 0 URL -->
+                <RowDefinition Height="Auto"/>
+                <!-- 1 Username -->
+                <RowDefinition Height="Auto"/>
+                <!-- 2 Password -->
+                <RowDefinition Height="Auto"/>
+                <!-- 3 DatabaseSource -->
+                <RowDefinition Height="Auto"/>
+                <!-- 4 Interval -->
+                <RowDefinition Height="Auto"/>
+                <!-- 5 DailyTime -->
+                <RowDefinition Height="Auto"/>
+                <!-- 6 Buttons -->
+            </Grid.RowDefinitions>
+
+            <!-- URL -->
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="URL API:" Margin="0,4,0,10"/>
+            <TextBox Grid.Row="0" Grid.Column="1" x:Name="txtUrlApi" Style="{StaticResource ConfigInputStyle}"/>
+
+            <!-- Username -->
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Tài khoản:" Margin="0,4,0,10"/>
+            <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtUsername" Style="{StaticResource ConfigInputStyle}"/>
+
+            <!-- Password -->
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Mật khẩu:" Margin="0,4,0,10"/>
+            <PasswordBox Grid.Row="2" Grid.Column="1" x:Name="txtPassword" Style="{StaticResource ConfigPasswordStyle}"/>
+
+            <!-- ⭐ NEW: Chọn nguồn Database -->
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Nguồn DB:" Margin="0,4,0,10"/>
+            <ComboBox Grid.Row="3" Grid.Column="1"
+                      x:Name="cmbDatabaseSource"
+                      ItemsSource="{Binding Source={StaticResource DatabaseSourceEnum}}"
+                      Margin="0,0,0,10"/>
+
+            <!-- Interval -->
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="Thời gian gửi:" Margin="0,4,0,10" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="4" Grid.Column="1" x:Name="txtInterval"
+                     Style="{StaticResource ShortInputStyle}"
+                     Margin="-250,0,5,10"
+                     ToolTip="=0 thì ưu tiên chạy theo mốc time hàng ngày"/>
+            <TextBlock Grid.Row="4" Grid.Column="1" Text="phút"
+                       FontSize="13" VerticalAlignment="Center" Margin="60,4,0,10"/>
+
+            <!-- Daily Time -->
+            <TextBox Grid.Row="5" Grid.Column="1"
+                     x:Name="txtDailyTime"
+                     Style="{StaticResource ShortInputStyle}"
+                     Margin="-250,0,5,10"
+                     ToolTip="hh:mm"/>
+            <TextBlock Grid.Row="5" Grid.Column="1"
+                       Text="thời gian gửi dữ liệu hàng ngày"
+                       FontSize="13"
+                       VerticalAlignment="Center"
+                       Margin="60,4,0,10"/>
+
+            <!-- Buttons -->
+            <StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Margin="0,20,0,0">
+                <Button x:Name="btnSave"
+                        Content="💾 Lưu"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Width="110"
+                        Margin="0,0,12,0"
+                        Click="BtnSave_Click"/>
+                <Button x:Name="btnStart"
+                        Content="▶ Bắt đầu"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Width="110"
+                        Margin="0,0,12,0"
+                        Click="BtnStart_Click"/>
+                <Button x:Name="btnStop"
+                        Content="⏹ Dừng"
+                        Style="{StaticResource DangerButtonStyle}"
+                        Width="110"
+                        IsEnabled="False"
+                        Click="BtnStop_Click"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- ====== LOG (phải) ====== -->
+        <StackPanel Grid.Row="1" Grid.Column="1" Margin="40,0,0,0" VerticalAlignment="Top">
+            <Border BorderThickness="1" BorderBrush="#DDD" CornerRadius="8">
+                <ScrollViewer Height="800" VerticalScrollBarVisibility="Auto">
+                    <ListBox ItemsSource="{Binding Logs}" x:Name="lstLog"
+                             Background="#FAFAFA" BorderThickness="0" Padding="5"
+                             HorizontalContentAlignment="Left" VerticalContentAlignment="Top">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Message}"
+                                           Foreground="{Binding Color}"
+                                           FontSize="13"
+                                           Margin="0,2,0,2"
+                                           TextWrapping="Wrap"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </ScrollViewer>
+            </Border>
+        </StackPanel>
+
+    </Grid>
+</Page>

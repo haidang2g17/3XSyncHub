@@ -1,0 +1,172 @@
+﻿<!-- ============================================================================
+     🗂️ Module: 3XSyncHub.UI.Theme.xaml
+     🔖 Version: 20251119_1023
+     📌 Nội dung đã xử lý:
+     - Định nghĩa toàn bộ palette màu chuẩn 3XVN.UI (Chrome Flat v5)
+     - Chuẩn hóa 3 nhóm nút: Primary, Secondary, Danger
+     - Template nút phẳng, hover rõ ràng, disabled thống nhất
+     - Áp dụng làm ResourceDictionary gốc cho toàn bộ giao diện 3XSyncHub
+   ============================================================================ -->
+
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ========================= -->
+    <!-- 🎨 CHROME FLAT COLOR PALETTE (3XVN v5) -->
+    <!-- ========================= -->
+    <SolidColorBrush x:Key="PrimaryColor" Color="#b7d6eb"/>
+    <!-- Xanh dịu -->
+    <SolidColorBrush x:Key="PrimaryHover" Color="#a5c8e0"/>
+    <!-- Xanh hover -->
+    <SolidColorBrush x:Key="SecondaryColor" Color="#b7d6eb"/>
+    <!-- Xám sáng -->
+    <SolidColorBrush x:Key="SecondaryHover" Color="#a5c8e0"/>
+    <!-- Xám hover -->
+    <SolidColorBrush x:Key="DangerColor" Color="#D93025"/>
+    <!-- Đỏ cảnh báo -->
+    <SolidColorBrush x:Key="DangerHover" Color="#C5221F"/>
+    <!-- Đỏ hover -->
+    <SolidColorBrush x:Key="DisabledBackground" Color="#E0E0E0"/>
+    <!-- Xám disable -->
+    <SolidColorBrush x:Key="DisabledForeground" Color="#757575"/>
+    <!-- Chữ disable -->
+    <SolidColorBrush x:Key="WhiteBrush" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="BlackBrush" Color="#000000"/>
+
+    <!-- ========================= -->
+    <!-- 🧱 BASE BUTTON STYLE -->
+    <!-- ========================= -->
+    <Style TargetType="Button">
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Height" Value="32"/>
+        <Setter Property="MinWidth" Value="100"/>
+        <Setter Property="Margin" Value="0,0,10,0"/>
+        <Setter Property="Padding" Value="10,4"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
+        <Setter Property="Foreground" Value="{StaticResource BlackBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <!-- Hover -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource PrimaryHover}"/>
+                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource WhiteBrush}"/>
+                            <Setter TargetName="border" Property="BorderThickness" Value="1"/>
+                        </Trigger>
+                        <!-- Disabled -->
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource DisabledBackground}"/>
+                            <Setter Property="Foreground" Value="{StaticResource DisabledForeground}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================= -->
+    <!-- 💾 PRIMARY BUTTON -->
+    <!-- ========================= -->
+    <Style x:Key="PrimaryButtonStyle"
+           TargetType="Button"
+           BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
+        <Setter Property="Foreground" Value="{StaticResource BlackBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border" Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource PrimaryHover}"/>
+                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource WhiteBrush}"/>
+                            <Setter TargetName="border" Property="BorderThickness" Value="1"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource DisabledBackground}"/>
+                            <Setter Property="Foreground" Value="{StaticResource DisabledForeground}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================= -->
+    <!-- ⚪ SECONDARY BUTTON -->
+    <!-- ========================= -->
+    <Style x:Key="SecondaryButtonStyle"
+           TargetType="Button"
+           BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="Background" Value="{StaticResource SecondaryColor}"/>
+        <Setter Property="Foreground" Value="{StaticResource BlackBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border" Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource SecondaryHover}"/>
+                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource WhiteBrush}"/>
+                            <Setter TargetName="border" Property="BorderThickness" Value="1"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource DisabledBackground}"/>
+                            <Setter Property="Foreground" Value="{StaticResource DisabledForeground}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================= -->
+    <!-- 🛑 DANGER BUTTON -->
+    <!-- ========================= -->
+    <Style x:Key="DangerButtonStyle"
+           TargetType="Button"
+           BasedOn="{StaticResource {x:Type Button}}">
+        <Setter Property="Background" Value="{StaticResource DangerColor}"/>
+        <Setter Property="Foreground" Value="{StaticResource BlackBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border" Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource DangerHover}"/>
+                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource WhiteBrush}"/>
+                            <Setter TargetName="border" Property="BorderThickness" Value="1"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource DisabledBackground}"/>
+                            <Setter Property="Foreground" Value="{StaticResource DisabledForeground}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

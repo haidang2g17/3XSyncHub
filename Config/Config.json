@@ -1,0 +1,43 @@
+﻿{
+    "DatabaseMaster": {
+        "Host": "192.168.1.45",
+        "Port": "5432",
+        "Database": "bvphutho",
+        "User": "postgres",
+        "Password": "phutho1234"
+    },
+
+    "DatabaseSlave": {
+        "Host": "192.168.1.46",
+        "Port": "5432",
+        "Database": "bvphutho",
+        "User": "postgres",
+        "Password": "phutho1234"
+    },
+
+    "DashboardSYT": {
+        "DatabaseSource": "DatabaseSlave",
+
+        "BaseUrl": "https://sytphutho.yte360.com",
+        "ApiPrefix": "",
+        "Auth": {
+            "Type": "",
+            "Username": "25001",
+            "Password": "25001*PW",
+            "TokenUrl": ""
+        },
+        "IntervalMinutes": 0,
+        "DailyTime": "07:00"
+    },
+
+    "Autoupdate": {
+        "HISUpdateStock": true,
+        "EMRUpdateDocument": true,
+        "HISUpdateStockInterval": 5,
+        "EMRUpdateDocumentInterval": 1440,
+        "Version": null,
+        "Url": null,
+        "CreatedDate": "0001-01-01T00:00:00",
+        "Active": false
+    }
+}

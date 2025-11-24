@@ -1,0 +1,73 @@
+﻿<!-- ============================================================================
+     🗂️ Module: 3XSyncHub.UI.Inputs.xaml
+     🔖 Version: 20251119_1038
+     📌 Nội dung đã xử lý:
+     - Định nghĩa bộ style chuẩn cho input field (TextBox, PasswordBox)
+     - Tách style chung UnifiedInputStyle làm nền tảng cấu trúc
+     - Đảm bảo UI thống nhất: chiều cao, border, padding, typography
+     - Áp dụng chuẩn 3XVN.UI.v7.x cho toàn bộ hệ thống nhập liệu
+   ============================================================================ -->
+
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ========================= -->
+    <!-- 🧱 STYLE CHUNG INPUT FIELD -->
+    <!-- ========================= -->
+    <Style x:Key="UnifiedInputStyle" TargetType="Control">
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Padding" Value="6,3"/>
+        <Setter Property="BorderBrush" Value="#888"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Margin" Value="0,5,0,12"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+
+    <!-- ========================= -->
+    <!-- ✏️ TEXTBOX MẶC ĐỊNH -->
+    <!-- ========================= -->
+    <Style TargetType="TextBox" BasedOn="{StaticResource UnifiedInputStyle}">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Foreground" Value="#222"/>
+        <Setter Property="BorderBrush" Value="#888"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}">
+                        <ScrollViewer x:Name="PART_ContentHost"
+                                      Margin="{TemplateBinding Padding}"
+                                      VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ========================= -->
+    <!-- 🔒 PASSWORD BOX -->
+    <!-- ========================= -->
+    <Style TargetType="PasswordBox" BasedOn="{StaticResource UnifiedInputStyle}">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Foreground" Value="#222"/>
+        <Setter Property="BorderBrush" Value="#888"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="PasswordBox">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}">
+                        <ScrollViewer x:Name="PART_ContentHost"
+                                      Margin="{TemplateBinding Padding}"
+                                      VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

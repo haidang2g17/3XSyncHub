@@ -1,0 +1,44 @@
+﻿<Application x:Class="_3XSyncHub.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ui="http://schemas.modernwpf.com/2019"
+             StartupUri="MainWindow.xaml">
+
+ <!-- ============================================================================
+     🗂️ Module: App.xaml
+     🔖 Version: 20251119_3XSyncHub.UI.App.v1.1
+     📝 Mục đích:
+         - Khởi tạo ứng dụng WPF
+         - Load toàn bộ ResourceDictionary hệ thống (Styles, Inputs, Dialogs…)
+         - Kích hoạt ModernWpf theme cho toàn bộ dự án
+============================================================================ -->
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+
+                <!-- 🌙 ModernWpf base theme -->
+                <ui:ThemeResources />
+                <ui:XamlControlsResources />
+
+                <!-- 🎨 Style hệ thống 3XVN -->
+                <ResourceDictionary Source="pack://application:,,,/Resources/Styles/Buttons.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Resources/Styles/Typography.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Resources/Styles/Dialogs.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Resources/Styles/Inputs.xaml"/>
+
+                <!-- ⚙️ Gán lại key mặc định cho toàn bộ dialog/button -->
+                <ResourceDictionary>
+                    <Style x:Key="AccentButtonStyle"
+                           TargetType="Button"
+                           BasedOn="{StaticResource PrimaryButtonStyle}"/>
+
+                    <Style x:Key="DefaultButtonStyle"
+                           TargetType="Button"
+                           BasedOn="{StaticResource SecondaryButtonStyle}"/>
+                </ResourceDictionary>
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

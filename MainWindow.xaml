@@ -1,0 +1,188 @@
+﻿<!-- ============================================================================
+ 🗂️ Module: MainWindow.xaml
+ 🔖 Version: 20251120_0100
+ 📝 Mục đích:
+     - Khung giao diện chính (NavigationView + ContentFrame)
+     - Điều hướng giữa các module DBConfig / DashboardSYT / AutoUpdate / Home
+     - Duy trì menu icon 40×40, không custom template để giữ event gốc
+ ============================================================================ -->
+
+<Window x:Class="_3XSyncHub.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        xmlns:controls="clr-namespace:ModernWpf.Controls;assembly=ModernWpf"
+        Title="3X SyncHub v2025.11.20"
+        Height="800" Width="1200"
+        Icon="Resources/Icon/app.ico"
+        Closing="MainWindow_Closing">
+
+    <ui:NavigationView
+        x:Name="NavView"
+        PaneDisplayMode="Left"
+        IsPaneOpen="True"
+        IsBackButtonVisible="Collapsed"
+        IsSettingsVisible="False"
+        OpenPaneLength="200"
+        CompactPaneLength="56"
+        PaneTitle="Menu"
+        SelectionChanged="NavView_SelectionChanged">
+
+        <!-- =========================================================
+             🎨 Tone Blue Mist cơ bản
+        ========================================================== -->
+        <ui:NavigationView.Resources>
+
+            <!-- 🟦 Nền cố định toàn cột menu -->
+            <SolidColorBrush x:Key="NavigationViewDefaultPaneBackground" Color="#b7d6eb"/>
+            <SolidColorBrush x:Key="NavigationViewExpandedPaneBackground" Color="#b7d6eb"/>
+            <SolidColorBrush x:Key="NavigationViewTopPaneBackground" Color="#b7d6eb"/>
+
+            <!-- 🌈 Màu chữ & icon -->
+            <SolidColorBrush x:Key="NavigationViewItemForeground" Color="#1E2A33"/>
+            <SolidColorBrush x:Key="NavigationViewItemForegroundSelected" Color="#0078D7"/>
+
+            <!-- 💡 Màu hover / selected -->
+            <SolidColorBrush x:Key="NavigationViewItemBackground" Color="#b7d6eb"/>
+            <SolidColorBrush x:Key="NavigationViewItemBackgroundPointerOver" Color="#a5c8e0"/>
+            <SolidColorBrush x:Key="NavigationViewItemBackgroundSelected" Color="#dcebf6"/>
+
+            <!-- 🧭 Style item -->
+            <Style TargetType="ui:NavigationViewItem">
+                <Setter Property="Height" Value="60"/>
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                <Setter Property="Background" Value="{StaticResource NavigationViewItemBackground}"/>
+                <Setter Property="Cursor" Value="Hand"/>
+            </Style>
+
+        </ui:NavigationView.Resources>
+
+
+        <!-- =========================================================
+             🧭 Menu chính (icon thật 40x40 + text)
+        ========================================================== -->
+        <ui:NavigationView.MenuItems>
+
+            <!-- 🏠 Trang chủ -->
+            <ui:NavigationViewItem Tag="home" Height="40">
+                <Grid VerticalAlignment="Center" Margin="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ui:SymbolIcon Symbol="Home"
+                           Width="32" Height="32"
+                           Margin="-3,0,10,0"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"/>
+
+                    <TextBlock Grid.Column="1"
+                       Text="Trang chủ"
+                       VerticalAlignment="Center"
+                       FontSize="14"
+                       Foreground="#1E2A33"/>
+                </Grid>
+            </ui:NavigationViewItem>
+
+            <!-- 🗄️ Kết nối Database -->
+            <ui:NavigationViewItem Tag="dbconfig" Height="40">
+                <Grid VerticalAlignment="Center" Margin="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ui:SymbolIcon Symbol="Setting"
+                           Width="32" Height="32"
+                           Margin="-3,0,10,0"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"/>
+
+                    <TextBlock Grid.Column="1"
+                       Text="Kết nối Database"
+                       VerticalAlignment="Center"
+                       FontSize="14"
+                       Foreground="#1E2A33"/>
+                </Grid>
+            </ui:NavigationViewItem>
+
+            <!-- 📡 Kết nối SYT PTO -->
+            <ui:NavigationViewItem Tag="dashboardsyt" Height="40">
+                <Grid VerticalAlignment="Center" Margin="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ui:SymbolIcon Symbol="Share"
+                           Width="32" Height="32"
+                           Margin="-3,0,10,0"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"/>
+
+                    <TextBlock Grid.Column="1"
+                       Text="Kết nối SYT PTO"
+                       VerticalAlignment="Center"
+                       FontSize="14"
+                       Foreground="#1E2A33"/>
+                </Grid>
+            </ui:NavigationViewItem>
+
+            <!-- 💊 Xử lý phiếu Thuốc/VT -->
+            <ui:NavigationViewItem Tag="phieu" Height="40" Width="220">
+                <Grid VerticalAlignment="Center" Margin="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ui:SymbolIcon Symbol="Repair"
+                           Width="32" Height="32"
+                           Margin="-3,0,10,0"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"/>
+
+                    <TextBlock Grid.Column="1"
+                       Text="Xử lý phiếu Thuốc/VT"
+                       VerticalAlignment="Center"
+                       FontSize="14"
+                       Foreground="#1E2A33"/>
+                </Grid>
+            </ui:NavigationViewItem>
+
+            <!-- 🔁 Tác vụ tự động -->
+            <ui:NavigationViewItem Tag="autoupdate" Height="40">
+                <Grid VerticalAlignment="Center" Margin="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ui:SymbolIcon Symbol="Sync"
+                           Width="32" Height="32"
+                           Margin="-3,0,10,0"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"/>
+
+                    <TextBlock Grid.Column="1"
+                       Text="Tác vụ tự động"
+                       VerticalAlignment="Center"
+                       FontSize="14"
+                       Foreground="#1E2A33"/>
+                </Grid>
+            </ui:NavigationViewItem>
+
+        </ui:NavigationView.MenuItems>
+
+        <!-- =========================================================
+             📄 Nội dung hiển thị
+        ========================================================== -->
+        <ui:NavigationView.Content>
+            <Frame x:Name="ContentFrame" NavigationUIVisibility="Hidden"/>
+        </ui:NavigationView.Content>
+
+    </ui:NavigationView>
+</Window>

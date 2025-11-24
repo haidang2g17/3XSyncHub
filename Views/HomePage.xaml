@@ -1,0 +1,104 @@
+﻿<!-- ============================================================================
+     🗂️ Module: HomePage.xaml
+     🔖 Version: 20251119_3XSyncHub.UI.Home.v1.3
+     📝 Mô tả:
+         - Giao diện giới thiệu phần mềm 3X SyncHub
+         - Chuẩn ModernWpf: phẳng, gọn, font Segoe UI
+         - Thông tin tổng quan + chức năng chính
+============================================================================ -->
+
+
+<Page x:Class="_3XSyncHub.Views.HomePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d"
+      Background="White">
+
+    <Grid Margin="50,60,50,40">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Width="700">
+
+                <!-- Tiêu đề -->
+                <TextBlock Text="🏠 3X SyncHub – Giải pháp đồng bộ dữ liệu thông minh"
+                           FontSize="22"
+                           FontWeight="Bold"
+                           Foreground="#2E3A59"
+                           TextAlignment="Center"
+                           Margin="0,0,0,15"/>
+
+                <!-- Giới thiệu -->
+                <TextBlock TextWrapping="Wrap"
+                           TextAlignment="Center"
+                           FontSize="15"
+                           Foreground="#444"
+                           Margin="0,0,0,5">
+                    <Run Text="3X SyncHub" FontWeight="Bold" />
+                    <Run Text=" mang đến khả năng kết nối và đồng bộ dữ liệu giữa HIS và các trung tâm dữ liệu khác " />
+                    <Run Text="nhanh chóng, ổn định và tuyệt đối an toàn." FontWeight="Bold" />
+                </TextBlock>
+
+
+                <TextBlock Text="Giảm thao tác thủ công, đảm bảo dữ liệu luôn chính xác và thống nhất."
+                           FontSize="15"
+                           Foreground="#555"
+                           TextAlignment="Center"
+                           TextWrapping="Wrap"
+                           Margin="0,0,0,25"/>
+
+                <!-- Chức năng chính -->
+                <Border Background="#FAFAFA"
+                        BorderBrush="#DDD"
+                        BorderThickness="1"
+                        CornerRadius="12"
+                        Padding="24"
+                        Margin="0,0,0,30">
+                    <StackPanel>
+                        <TextBlock Text="⚙️  Chức năng chính"
+                                   FontSize="16"
+                                   FontWeight="SemiBold"
+                                   Foreground="#2E3A59"
+                                   Margin="0,0,0,10"/>
+
+                        <TextBlock Text="• Cấu hình kết nối – Thiết lập và kiểm tra kết nối tới hệ thống HIS."
+                                   FontSize="14"
+                                   Foreground="#333"
+                                   Margin="0,4,0,0"/>
+                        <TextBlock Text="• Kết nối Dashboard SYT PTO – Đồng bộ dữ liệu, theo dõi và giám sát đồng bộ thời gian thực."
+                                   FontSize="14"
+                                   Foreground="#333"
+                                   Margin="0,4,0,0"/>
+                        <TextBlock Text="• Tác vụ tự động – Cập nhật dữ liệu tự động và liên tục."
+                                   FontSize="14"
+                                   Foreground="#333"
+                                   Margin="0,4,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Slogan -->
+                <StackPanel HorizontalAlignment="Center" Margin="0,0,0,10">
+                    <TextBlock Text="💡 Đơn giản – Hiệu quả – Tin cậy."
+                               FontSize="15"
+                               FontWeight="SemiBold"
+                               Foreground="#2E3A59"
+                               TextAlignment="Center"
+                               Margin="0,0,0,6"/>
+                    <TextBlock Text="3X SyncHub đồng hành cùng mọi hệ thống y tế trong hành trình số hóa dữ liệu."
+                               FontSize="14"
+                               Foreground="#555"
+                               TextAlignment="Center"
+                               TextWrapping="Wrap"/>
+                </StackPanel>
+
+                <!-- Footer -->
+                <TextBlock Text="Phiên bản 2025.11.11 © 2025 3XVN"
+                           FontSize="12"
+                           Foreground="#999"
+                           TextAlignment="Center"
+                           Margin="0,25,0,0"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

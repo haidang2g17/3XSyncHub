@@ -1,0 +1,75 @@
+﻿<!-- ============================================================================
+ 🗂️ Module: 3XSyncHub.UI.ClassicDialog.xaml
+ 🔖 Version: 20251119_1155
+ 📌 Nội dung đã xử lý:
+   - Giao diện dialog chuẩn 3XVN.UI.Dialog: ModernWpf phẳng, bo góc mềm
+   - Tiêu đề + icon dạng TextBlock, font Segoe UI đồng nhất
+   - Khung dialog có BorderRadius 12, viền #DDD, bóng nhẹ ThemeShadow
+   - Khu vực nút canh phải, spacing 10px, width 100px theo chuẩn hệ thống
+ ============================================================================ -->
+
+<Window x:Class="_3XSyncHub.Views.Dialogs.ClassicDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ShowInTaskbar="False"
+        Title="3X SyncHub"
+        Icon="/Resources/Icon/app.ico">
+
+    <Border CornerRadius="12"
+            Background="White"
+            BorderBrush="#DDD"
+            BorderThickness="1"
+            Padding="24"
+            SnapsToDevicePixels="True"
+            Effect="{DynamicResource ThemeShadow}">
+
+        <StackPanel>
+            <!-- Tiêu đề -->
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                <TextBlock x:Name="txtIcon"
+                           FontSize="20"
+                           VerticalAlignment="Center"
+                           Margin="0,0,8,0"/>
+                <TextBlock x:Name="txtTitle"
+                           FontFamily="Segoe UI Semibold"
+                           FontSize="16"
+                           Foreground="#2E3A59"
+                           VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <!-- Nội dung -->
+            <TextBlock x:Name="txtMessage"
+                       FontFamily="Segoe UI"
+                       FontSize="14"
+                       Foreground="#333"
+                       TextWrapping="Wrap"
+                       Margin="0,0,0,20"/>
+
+            <!-- Khu vực nút -->
+            <StackPanel x:Name="ButtonPanel"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        Margin="0,10,0,0">
+                <StackPanel.Resources>
+                    <!-- Áp margin phải 10px cho tất cả button trong dialog -->
+                    <Style TargetType="Button">
+                        <Setter Property="Margin" Value="0,0,10,0"/>
+                        <Setter Property="Width" Value="100"/>
+                        <Setter Property="Height" Value="Auto"/>
+                        <Setter Property="FontSize" Value="14"/>
+                    </Style>
+                </StackPanel.Resources>
+
+                <!-- Ví dụ nút mẫu 
+                <Button Content="OK" Background="#0078D7" Foreground="White"/>
+                <Button Content="Cancel" Background="#FFF" BorderBrush="#CCC" Foreground="#2E3A59"/> -->
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</Window>
